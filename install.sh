@@ -8,7 +8,7 @@ if [[ "$OS" == "Darwin" ]]; then
     brew install stow neovim tmux
 elif [[ "$OS" == "Linux" ]]; then
     sudo apt-get update -qq
-    sudo apt-get install -y stow neovim tmux curl
+    sudo apt-get install -y stow neovim tmux curl eza
 fi
 
 echo "==> Installing oh-my-zsh..."
