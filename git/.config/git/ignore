@@ -1,0 +1,6 @@
+.DS_Store
+.zsh_history
+.zcompdump*
+
+**/.claude/settings.local.json
+
