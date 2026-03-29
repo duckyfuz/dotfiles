@@ -47,3 +47,4 @@ foreground = #ffffff
 
 font-family = Hack Nerd Font Mono Bold
 font-size = 14
+keybind = shift+enter=text:\x1b\r
