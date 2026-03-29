@@ -116,4 +116,4 @@ export PATH="/Users/kenf/.antigravity/antigravity/bin:$PATH"
 
 export PATH="/Users/kenf/go/bin:$PATH"
 
-alias ll="eza -lah"
+alias l="eza -lah"
