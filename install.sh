@@ -5,10 +5,18 @@ OS="$(uname -s)"
 
 echo "==> Installing core packages..."
 if [[ "$OS" == "Darwin" ]]; then
-    brew install stow neovim tmux
+    brew install stow neovim tmux jenv
 elif [[ "$OS" == "Linux" ]]; then
     sudo apt-get update -qq
     sudo apt-get install -y stow neovim tmux curl eza
+    if [[ ! -e "$HOME/.jenv" ]]; then
+        git clone https://github.com/jenv/jenv.git "$HOME/.jenv"
+    elif [[ -d "$HOME/.jenv/.git" ]]; then
+        echo "==> Reusing existing jenv checkout at $HOME/.jenv"
+    else
+        echo "Error: $HOME/.jenv already exists but is not a jenv git checkout." >&2
+        exit 1
+    fi
 fi
 
 echo "==> Installing oh-my-zsh..."
