@@ -8,10 +8,18 @@ if [[ "$OS" == "Darwin" ]]; then
     brew install stow neovim tmux jenv
     sudo chsh -s "$(which zsh)" "$USER"
 elif [[ "$OS" == "Linux" ]]; then
-    sudo add-apt-repository -y --no-update ppa:neovim-ppa/stable
     sudo apt update -qq
-    sudo apt install -y stow tmux curl neovim eza zsh
+    sudo apt install -y stow tmux curl eza zsh
     sudo chsh -s "$(which zsh)" "$USER"
+
+    echo "==> Installing latest Neovim..."
+    NVIM_URL="$(
+        curl -fsSL https://api.github.com/repos/neovim/neovim/releases/latest |
+            grep 'browser_download_url.*nvim-linux-x86_64\.tar\.gz"' |
+            cut -d'"' -f4
+    )"
+    curl -fsSL "$NVIM_URL" | sudo tar -xz -C /opt
+    sudo ln -sf /opt/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
 
     if [[ ! -e "$HOME/.jenv" ]]; then
         git clone https://github.com/jenv/jenv.git "$HOME/.jenv"
