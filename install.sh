@@ -7,7 +7,7 @@ echo "==> Installing core packages..."
 if [[ "$OS" == "Darwin" ]]; then
     brew install stow neovim tmux jenv
 elif [[ "$OS" == "Linux" ]]; then
-    sudo add-apt-repository ppa:neovim-ppa/stable
+    sudo add-apt-repository -y --no-update ppa:neovim-ppa/stable
     sudo apt update -qq
     sudo apt install -y stow tmux curl neovim eza
     if [[ ! -e "$HOME/.jenv" ]]; then
