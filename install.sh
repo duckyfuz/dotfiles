@@ -6,10 +6,13 @@ OS="$(uname -s)"
 echo "==> Installing core packages..."
 if [[ "$OS" == "Darwin" ]]; then
     brew install stow neovim tmux jenv
+    sudo chsh -s "$(which zsh)" "$USER"
 elif [[ "$OS" == "Linux" ]]; then
     sudo add-apt-repository -y --no-update ppa:neovim-ppa/stable
     sudo apt update -qq
     sudo apt install -y stow tmux curl neovim eza zsh
+    sudo chsh -s "$(which zsh)" "$USER"
+
     if [[ ! -e "$HOME/.jenv" ]]; then
         git clone https://github.com/jenv/jenv.git "$HOME/.jenv"
     elif [[ -d "$HOME/.jenv/.git" ]]; then
@@ -40,4 +43,4 @@ ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 echo "==> Stowing dotfiles..."
 stow */
 
-echo "Done! Start a new shell: exec zsh"
+echo "Done! Please log out and back in for the default shell change to take effect."
