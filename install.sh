@@ -9,7 +9,7 @@ if [[ "$OS" == "Darwin" ]]; then
 elif [[ "$OS" == "Linux" ]]; then
     sudo add-apt-repository -y --no-update ppa:neovim-ppa/stable
     sudo apt update -qq
-    sudo apt install -y stow tmux curl neovim eza
+    sudo apt install -y stow tmux curl neovim eza zsh
     if [[ ! -e "$HOME/.jenv" ]]; then
         git clone https://github.com/jenv/jenv.git "$HOME/.jenv"
     elif [[ -d "$HOME/.jenv/.git" ]]; then
