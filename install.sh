@@ -3,13 +3,31 @@ set -euo pipefail
 
 OS="$(uname -s)"
 
+have_cmd() {
+    command -v "$1" >/dev/null 2>&1
+}
+
 echo "==> Installing core packages..."
 if [[ "$OS" == "Darwin" ]]; then
     brew install stow neovim tmux jenv
     sudo chsh -s "$(which zsh)" "$USER"
 elif [[ "$OS" == "Linux" ]]; then
-    sudo apt update -qq
-    sudo apt install -y stow tmux curl eza zsh
+    if have_cmd apt-get; then
+        sudo apt-get update -qq
+        sudo apt-get install -y stow tmux curl eza zsh git
+    elif have_cmd dnf; then
+        sudo dnf install -y stow tmux curl zsh git tar gzip
+
+        if sudo dnf install -y eza; then
+            :
+        else
+            echo "==> Skipping eza install: package not available in the configured dnf repositories."
+        fi
+    else
+        echo "Error: unsupported Linux package manager. Expected apt-get or dnf." >&2
+        exit 1
+    fi
+
     sudo chsh -s "$(which zsh)" "$USER"
 
     echo "==> Installing latest Neovim..."

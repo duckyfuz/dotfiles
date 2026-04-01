@@ -116,4 +116,8 @@ export PATH="/Users/kenf/.antigravity/antigravity/bin:$PATH"
 
 export PATH="/Users/kenf/go/bin:$PATH"
 
-alias l="eza -lah"
+if command -v eza >/dev/null 2>&1; then
+  alias l="eza -lah"
+else
+  alias l="ls -lah"
+fi
