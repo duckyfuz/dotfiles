@@ -7,8 +7,9 @@ echo "==> Installing core packages..."
 if [[ "$OS" == "Darwin" ]]; then
     brew install stow neovim tmux
 elif [[ "$OS" == "Linux" ]]; then
-    sudo apt-get update -qq
-    sudo apt-get install -y stow neovim tmux curl
+    sudo add-apt-repository ppa:neovim-ppa/stable
+    sudo apt update -qq
+    sudo apt install -y stow tmux curl neovim
 fi
 
 echo "==> Installing oh-my-zsh..."
